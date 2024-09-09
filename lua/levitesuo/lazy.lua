@@ -11,7 +11,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup("levitesuo.plugins", {
+require("lazy").setup({ {import = "levitesuo.plugins"}, { import = "levitesuo.plugins.lsp" } }, {
   checker = {
     enable = true,
     notify = false,
