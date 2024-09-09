@@ -5,52 +5,51 @@ return {
     local lualine = require("lualine")
     local lazy_status = require("lazy.status") -- to configure lazy pending updates count
 
-    local kanagawa = require("kanagawa.colors").setup()
+  local theme = require("kanagawa.colors").setup().theme
 
-    local colors_theme = kanagawa.theme
-    local colors_p = kanagawa.palette
+  local kanagawa = {}
 
-    local colors = {
-      fg = colors_theme.ui.fg,
-      bg = colors_theme.ui.bg,
-    }
-    local my_lualine_theme = {
-      normal = {
-        a = { bg = colors_p.springGreen, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      insert = {
-        a = { bg = colors_p.sakuraPink, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      visual = {
-        a = { bg = colors_p.oniViolet, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      command = {
-        a = { bg = colors_p.oldWhite, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      replace = {
-        a = { bg = colors_p.autumnRed, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-      inactive = {
-        a = { bg = colors_p.winterGreen, fg = colors_theme.ui.bg, gui = "bold" },
-        b = { bg = colors.bg, fg = colors.fg },
-        c = { bg = colors.bg, fg = colors.fg },
-      },
-    }
+  kanagawa.normal = {
+    a = { bg = theme.syn.fun, fg = theme.ui.bg_m3 },
+    b = { bg = theme.diff.change, fg = theme.syn.fun },
+    c = { bg = theme.ui.bg_p1, fg = theme.ui.fg },
+  }
 
+  kanagawa.insert = {
+    a = { bg = theme.diag.ok, fg = theme.ui.bg },
+    b = { bg = theme.ui.bg, fg = theme.diag.ok },
+  }
+
+  kanagawa.command = {
+    a = { bg = theme.syn.operator, fg = theme.ui.bg },
+    b = { bg = theme.ui.bg, fg = theme.syn.operator },
+  }
+
+  kanagawa.visual = {
+    a = { bg = theme.syn.keyword, fg = theme.ui.bg },
+    b = { bg = theme.ui.bg, fg = theme.syn.keyword },
+  }
+
+  kanagawa.replace = {
+    a = { bg = theme.syn.constant, fg = theme.ui.bg },
+    b = { bg = theme.ui.bg, fg = theme.syn.constant },
+  }
+
+  kanagawa.inactive = {
+    a = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+    b = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim, gui = "bold" },
+    c = { bg = theme.ui.bg_m3, fg = theme.ui.fg_dim },
+  }
+
+  if vim.g.kanagawa_lualine_bold then
+    for _, mode in pairs(kanagawa) do
+      mode.a.gui = "bold"
+    end
+  end
     -- configure lualine with modified theme
     lualine.setup({
       options = {
-        theme = my_lualine_theme,
+        theme = kanagawa,
       },
       sections = {
         lualine_x = {
