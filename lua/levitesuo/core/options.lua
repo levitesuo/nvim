@@ -29,3 +29,4 @@ opt.backspace = "indent,eol,start"
 
 opt.splitright = true
 opt.splitbelow = true
+
