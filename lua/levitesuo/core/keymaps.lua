@@ -22,4 +22,5 @@ keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer
 -- keymap.set({"n", "v", "i", "t", "c"}, "<Space><Space>", "<CR>", { desc = "Remapping enter to space space" })
 
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Move from terminal mode to normal" })
+vim.keymap.set("t", "jj", [[<C-\><C-n>]], { desc = "Move from terminal mode to normal" })
 -- vim.keymap.set('t', '<C-c>', [[<C-\><C-n>]], { desc = "Move from terminal mode to normal" })
